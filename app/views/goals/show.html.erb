@@ -1,2 +1,10 @@
-<h1>Goals#show</h1>
-<p>Find me in app/views/goals/show.html.erb</p>
+<h1>New Goal</h1>
+
+<h1><%= @goal.title %></h1>
+<br>
+<h2><%= @goal.body %></h2>
+
+
+<%= link_to "Edit Goal", edit_goal_url(@goal)%>
+
+<%= button_to "Delete Goal", goal_url(@goal), method: :delete %>

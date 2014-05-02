@@ -5,6 +5,9 @@ class User < ActiveRecord::Base
   validates :session_token, :presence => true, :uniqueness => true
   validates :username, :presence => true, :uniqueness => true
 
+  has_many :goals, inverse_of: :user
+
+
   before_validation :ensure_session_token
 
   def self.find_by_credentials(username, password)

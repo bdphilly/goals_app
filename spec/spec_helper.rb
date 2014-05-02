@@ -47,8 +47,15 @@ end
 
 
 def create_new_user
-  visit 'users/new'
-  fill_in 'username', :with => "biscuit"
-  fill_in 'password', :with => "password"
-  click_on "Create User"
+    visit 'users/new'
+    fill_in 'username', :with => "biscuit"
+    fill_in 'password', :with => "password"
+    click_button "Create User"
+end
+
+def make_goal(title, goal_text1)
+  visit new_goal_url
+  fill_in "title", :with => title
+  fill_in "body", :with => goal_text1
+  click_on "Submit Goal"
 end
