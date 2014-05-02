@@ -1,5 +1,6 @@
 <h1>Edit Goal</h1>
 
+
 <form action="<%= goal_url(@goal) %>" method="post">
   <input type="hidden" name="_method" value="patch">
   <input type="hidden" name="authenticity_token"
@@ -12,6 +13,31 @@
   <textarea name="goal[body]" value="" id="body"><%= @goal.body %></textarea>
   <br>
 
+  Private?
+  <label for="private">True</label>
+  <input id="private" type="radio" name="goal[private]" value="true"
+  <% if @goal.private %>
+    checked
+  <% end %> >
+  <label for="not_private">False</label>
+  <input id="not_private" type="radio" name="goal[private]" value="false"
+  <% unless @goal.private %>
+    checked
+  <% end %> >
+
+  <br>
+
+  Completed?
+  <label for="completion_true">True</label>
+  <input id="completion_true" type="radio" name="goal[completion]" value="true"
+  <% if @goal.completion %>
+    checked
+  <% end %> >
+  <label for="completion_false">False</label>
+  <input id="completion_false" type="radio" name="goal[completion]" value="false"
+  <% unless @goal.completion %>
+    checked
+  <% end %> >
 
   <input type="submit" value="Edit Goal">
 </form>

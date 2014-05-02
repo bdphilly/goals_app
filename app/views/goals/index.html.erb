@@ -1,2 +1,12 @@
 <h1>Goals Index Page</h1>
-<p>Find me in app/views/goals/index.html.erb</p>
+<ul>
+<% @goals.each do |goal| %>
+  <% if goal.user_id == current_user.id || goal.private == false %>
+     <% if goal.completion %>
+       <li><strike> <%= link_to goal.title, goal_url(goal) %> </strike></li>
+     <% else %>
+       <li> <%= link_to goal.title, goal_url(goal) %> </li>
+    <% end %>
+  <% end %>
+<% end %>
+</ul>

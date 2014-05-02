@@ -9,14 +9,13 @@
   <br>
   <label for="body">Goal</label>
   <br>
-  <label for="private">Private?</label>
-  <input type="checkbox" name="goal[private]" value="<%= @goal.private %>" id="private">
-
-
-
   <textarea name="goal[body]" value="" id="body"></textarea>
   <br>
-
-
+  Private?
+  <label for="private">True</label>
+  <input id="private" type="radio" name="goal[private]" value="true">
+  <label for="not_private">False</label>
+  <input id="not_private" type="radio" name="goal[private]" value="false">
+  <br>
   <input type="submit" value="Submit Goal">
 </form>

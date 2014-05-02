@@ -73,7 +73,7 @@ feature "Goals are cool, let's make some. But test first..." do
   feature "Private vs public goals" do
 
     before :each do
-      create_new_user(name1)
+      create_new_user(name1) #=> goal#index
       make_goal(title1, goal_text1, true)
       make_goal(title2, goal_text2, false)
       click_on "Sign Out"
@@ -93,8 +93,34 @@ feature "Goals are cool, let's make some. But test first..." do
     end
 
     scenario "User can see others' public goals" do
+      visit goals_url
       expect(page).to have_content title2
       expect(page).to have_content title3
     end
   end
+
+  feature "Goal Completion" do
+
+    before :each do
+      create_new_user(name1)
+      make_goal(title1, goal_text1)
+      make_goal(title2, goal_text2)
+      make_goal(title3, goal_text3)
+      visit goals_url
+    end
+
+    scenario "A user can mark a goal as completed" do
+      click_on "#{title1}"
+      click_on "Edit Goal"
+      choose "completion_true"
+      click_on "Edit Goal"
+      expect(page).to have_content "Completed? true"
+    end
+
+    scenario "A users's goal starts as uncompleted" do
+      click_on "#{title2}"
+      expect(page).to have_content "Completed? false"
+    end
+  end
+
 end
