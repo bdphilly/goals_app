@@ -46,16 +46,17 @@ RSpec.configure do |config|
 end
 
 
-def create_new_user
+def create_new_user(username = "biscuit")
     visit 'users/new'
-    fill_in 'username', :with => "biscuit"
+    fill_in 'username', :with => username
     fill_in 'password', :with => "password"
     click_button "Create User"
 end
 
-def make_goal(title, goal_text1)
+def make_goal(title, goal_text1, private_goal = false)
   visit new_goal_url
   fill_in "title", :with => title
   fill_in "body", :with => goal_text1
+  click_on "Private" if private_goal
   click_on "Submit Goal"
 end
