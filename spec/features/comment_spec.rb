@@ -25,7 +25,6 @@ feature "Comments are cool, let's make some. But test first..." do
     click_on "Sign Out"
   end
 
-
   feature "the comment creation process" do
     before :each do
       create_new_user(name2)
