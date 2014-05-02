@@ -3,44 +3,49 @@ require 'faker'
 
 feature "the goal creation process" do
 
-  before(:each) do
-    create_new_user
-  end
+  create_new_user
+  goal_text1 = Faker::Lorem.paragraph(4)
+  goal_text2 = Faker::Lorem.paragraph(4)
+
 
   feature "User creates a new goal" do
     visit new_goal_url
-    goal_text = Faker::Lorem.paragraph(4)
-    fill_in "Goal", :with => goal_text
+    fill_in "Goal", :with => goal_text1
     click_on "Submit Goal"
-  end
 
     scenario "redirects to goal show page after creation" do
       expect(page).to have_content "New Goal"
     end
 
     scenario "User can read their goal after creation" do
-      expect(page).to have_content goal_text
+      expect(page).to have_content goal_text1
     end
+  end
 
   feature "User can update their goal" do
     visit goal_url(goal_id: 1)
     click_on "Edit Goal"
-  end
 
     scenario "redirects to goal edit page" do
       expect(page).to have_content "Edit Goal"
     end
 
     scenario "user can edit their goal" do
-      goal_text = Faker::Lorem.paragraph(4)
-      fill_in "Goal", :with => goal_text
+      fill_in "Goal", :with => goal_text2
       click_on "Edit Goal"
-      expect(page).to have_content goal_text
+      expect(page).to have_content goal_text2
     end
+  end
 
-    scenario "User can delete their goal"
+  feature "User can delete their goal" do
+    visit goal_url(goal_id: 1)
+    click_on "Delete Goal"
 
+    scenario "User's goal is gone" do
+      expect(page).to_not have_content goal_text2
     end
+  end
+
 end
 
 feature "Private vs public goals" do
