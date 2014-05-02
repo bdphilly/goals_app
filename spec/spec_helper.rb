@@ -64,3 +64,9 @@ def make_goal(title, goal_text1, private_goal = false)
   end
   click_on "Submit Goal"
 end
+
+def make_comment(body)
+  fill_in "body", :with => body
+  click_button "Add Comment"
+end
+

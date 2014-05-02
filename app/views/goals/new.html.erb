@@ -1,11 +1,11 @@
 <h1>New Goal</h1>
-
+<div class="input-group">
 <form action="<%= goals_url %>" method="post">
   <input type="hidden" name="authenticity_token"
     value="<%= form_authenticity_token %>">
 
   <label for="title">Title</label>
-  <input type="text" name="goal[title]" value="" id="title">
+  <input type="text" name="goal[title]" value="" id="title" class="form-control">
   <br>
   <label for="body">Goal</label>
   <br>
@@ -13,9 +13,10 @@
   <br>
   Private?
   <label for="private">True</label>
-  <input id="private" type="radio" name="goal[private]" value="true">
+  <input id="private" type="radio" name="goal[private]" value="true" class="form-control">
   <label for="not_private">False</label>
-  <input id="not_private" type="radio" name="goal[private]" value="false">
+  <input id="not_private" type="radio" name="goal[private]" value="false" class="form-control">
   <br>
-  <input type="submit" value="Submit Goal">
+  <input type="submit" value="Submit Goal" class="form-control">
 </form>
+</div>

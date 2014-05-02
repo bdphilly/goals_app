@@ -2,6 +2,7 @@
 <% method = (user.persisted? ? "put" : "post") %>
 <% message = (user.persisted? ? "Update User" : "Create User") %>
 
+<div class="input-group">
 <form action="<%= action %>" method="post">
   <input
      name="_method"
@@ -16,15 +17,18 @@
   <input
      id="user_username"
      name="user[username]"
-     type="text">
+     type="text"
+     class="form-control">
   <br>
 
   <label for="user_password">password</label>
   <input
      id="user_password"
      name="user[password]"
-     type="password">
+     type="password"
+     class="form-control">
   <br>
 
-  <input type="submit" value="<%= message %>">
+  <input type="submit" value="<%= message %>" class="btn btn-primary">
 </form>
+</div>
