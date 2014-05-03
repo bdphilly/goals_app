@@ -7,9 +7,32 @@
 <h3>Completed? <%= @goal.completion %></h4>
 <br>
 <h4>Private Goal? <%= @goal.private %></h4>
+<br>
 
+<h2>Comments</h2>
+<% @goal.comments.each do |comment| %>
+  <%= comment.body %> <br>
+<% end %>
+
+<h3> Add a Comment </h3>
+<form action="<%= comments_url%>" method="post">
+  <input type="hidden" name="authenticity_token"
+    value="<%= form_authenticity_token %>">
+  <input type="hidden" name="comment[commentable_id]" value="<%= @goal.id %>">
+  <input type="hidden" name="comment[commentable_type]" value="<%= "Goal" %>">
+
+  <label for="body">Body</label>
+  <textarea type="text" name="comment[body]" id="body">
+    <%= @comment.body unless @comment.nil?%> </textarea>
+
+  <input type="submit" value="Add Comment">
+</form>
+
+<br>
 <%= link_to "Edit Goal", edit_goal_url(@goal)%>
 
 <%= button_to "Delete Goal", goal_url(@goal), method: :delete %>
+
+<%= link_to "Add a goal", new_goal_url %>
 
 <%= link_to "All Goals", goals_url%>

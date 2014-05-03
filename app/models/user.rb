@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
   validates :username, :presence => true, :uniqueness => true
 
   has_many :goals, inverse_of: :user
+  has_many :comments, as: :commentable
 
 
   before_validation :ensure_session_token

@@ -1,11 +1,33 @@
 <h1><%= @user.username %>'s Goals.</h1>
 
 <% @user.goals.each do |goal| %>
-  Title: <%= goal.title %>
+  Title: <%= link_to goal.title, goal_url(goal) %>
   <br>
   Goal: <%= goal.body %>
   <br><br>
 <% end %>
 
+<br>
+
+<h2>Comments</h2>
+<% @user.comments.each do |comment| %>
+  <%= comment.body %> <br>
+<% end %>
+
+<br>
 
 <%= link_to "Add a goal", new_goal_url %>
+
+<h3> Add a Comment </h3>
+<form action="<%= comments_url%>" method="post">
+  <input type="hidden" name="authenticity_token"
+    value="<%= form_authenticity_token %>">
+  <input type="hidden" name="comment[commentable_id]" value="<%= @user.id %>">
+  <input type="hidden" name="comment[commentable_type]" value="<%= "User" %>">
+
+  <label for="body">Body</label>
+  <textarea type="text" name="comment[body]" id="body">
+    <%= @comment.body unless @comment.nil?%> </textarea>
+
+  <input type="submit" value="Add Comment">
+</form>

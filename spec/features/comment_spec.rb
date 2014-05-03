@@ -32,17 +32,17 @@ feature "Comments are cool, let's make some. But test first..." do
 
     feature "User creates a comment on a goal" do
       scenario "Has an add comment box on goal page" do
-        visit goal_url(1)
+        visit goal_url(Goal.first.id)
         expect(page).to have_content "Add a Comment"
       end
 
       scenario "Has an add comment box on user page" do
-        visit user_url(1)
+        visit user_url(2)
         expect(page).to have_content "Add a Comment"
       end
 
       scenario "User creates a comment on the goal page" do
-        visit goal_url(1)
+        visit goal_url(Goal.first.id)
         make_comment(body_text1)
         expect(page).to have_content body_text1
       end
