@@ -1,13 +1,9 @@
 class User < ActiveRecord::Base
+  include UserValidations
   attr_reader :password
-  validates :password_digest, :presence => true
-  validates :password, :length => { :minimum => 6, :allow_nil => true }
-  validates :session_token, :presence => true, :uniqueness => true
-  validates :username, :presence => true, :uniqueness => true
 
   has_many :goals, inverse_of: :user
-  has_many :comments, as: :commentable
-
+  include Commentable
 
   before_validation :ensure_session_token
 
@@ -21,7 +17,8 @@ class User < ActiveRecord::Base
   end
 
   def is_password?(unencrypted_password)
-    BCrypt::Password.new(self.password_digest).is_password?(unencrypted_password)
+    BCrypt::Password.new(self.password_digest)
+                    .is_password?(unencrypted_password)
   end
 
   def password=(unencrypted_password)
